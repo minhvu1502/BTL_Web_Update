@@ -1,0 +1,13 @@
+﻿@using BanVaLi.Models
+@model List<tQuocGia>
+
+@{
+    foreach (var item in Model)
+    {
+        <li>
+            @{
+                <a class="nav-link" href="@Url.Action("GetProductByCountry","DanhMucSp",new {@MaNuoc = item.MaNuoc})">@item.TenNuoc</a>;
+            }
+        </li>
+    }
+}

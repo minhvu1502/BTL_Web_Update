@@ -1,0 +1,15 @@
+﻿@using BanVaLi.Models
+@model List<tLoaiSP>
+@{
+    ViewBag.Title = "DanhMucSanPham";
+}
+@{
+    foreach (var item in Model)
+    {
+    <li>
+        @{
+            <a href="@Url.Action("ChuDeSanPham","DanhMucSp",new {@MaLoai = item.MaLoai})">@item.Loai</a>;
+        }
+    </li>
+        }
+}

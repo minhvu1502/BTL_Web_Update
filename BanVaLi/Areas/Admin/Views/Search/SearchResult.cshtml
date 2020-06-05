@@ -1,0 +1,144 @@
+﻿
+@using BanVaLi.Models
+@using PagedList.Mvc
+@model PagedList.IPagedList<tDanhMucSP>
+@{
+    ViewBag.Title = "SearchResult";
+}
+
+<h2>SearchResult</h2>
+<div class="alert-danger">@ViewBag.Error</div>
+<div class="alert-success"> @ViewBag.ThongBao</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().TenSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaChatLieu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().NganLapTop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MauSac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaKichThuoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CanNang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DoNoi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaHangSX)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaNuocSX)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaDacTinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Website)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ThoiGianBaoHanh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().GioiThieuSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Gia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ChietKhau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaLoai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaDT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Anh)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaChatLieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NganLapTop)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MauSac)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaKichThuoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CanNang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoNoi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaHangSX)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaNuocSX)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaDacTinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Website)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiGianBaoHanh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioiThieuSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChietKhau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaLoai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Anh)
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("SearchResult", new { page = page, searchKey = ViewBag.keyword }))
