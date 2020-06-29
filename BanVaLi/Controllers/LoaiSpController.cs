@@ -10,7 +10,7 @@ namespace BanVaLi.Controllers
 
     public class LoaiSpController : Controller
     {
-        WebBanVaLiEntities db = new WebBanVaLiEntities();
+        WebBanVaLiEntities1 db = new WebBanVaLiEntities1();
         // GET: LoaiSp
         public ActionResult Index()
         {

@@ -7,16 +7,15 @@ using BanVaLi.Common;
 using BanVaLi.Models;
 using BanVaLi.Models.DAO;
 
-namespace BanVaLi.Areas.Admin.Controllers
+namespace BanVaLi.Controllers
 {
     public class LoginController : Controller
     {
-        // GET: Admin/Login
+        // GET: Login
         public ActionResult Index()
         {
             return View();
         }
-
         [HttpGet]
         public ActionResult Login()
         {
@@ -33,25 +32,37 @@ namespace BanVaLi.Areas.Admin.Controllers
                 if (result)
                 {
                     var user = userDao.GetByName(model.Username);
+                    var CheckRole = userDao.GetRoleUser(user.Username);
                     UserLogin userLogin = new UserLogin();
                     userLogin.UserID = user.ID;
                     userLogin.Username = user.Username;
                     Session.Add(SessionConstant.SESSION_USER, userLogin);
-                    return RedirectToAction("Index", "Home");
+                    Session.Add(SessionConstant.SESSION_USERNAME, userLogin.Username);
+                    if (CheckRole == true)
+                    {
+                        return RedirectToAction("Index", "HomeAdmin", new {area = "Admin"});
+                    }
+                    else
+                    {
+                        
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError("","Đăng nhập thất bại");
+                    ModelState.AddModelError("", "Đăng nhập thất bại");
                 }
             }
             return View();
         }
+
         public ActionResult Logout()
         {
             HttpContext.Session[SessionConstant.SESSION_USER] = null;
             HttpContext.Session[SessionConstant.SESSION_USERNAME] = null;
+            HttpContext.Session[SessionConstant.SESSION_CART] = null;
             TempData["check"] = false;
-            return RedirectToAction("Login", "Login");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -13,7 +13,7 @@ namespace BanVaLi.Controllers
 {
     public class HomeController : Controller
     {
-        WebBanVaLiEntities db = new WebBanVaLiEntities();
+        WebBanVaLiEntities1 db = new WebBanVaLiEntities1();
         public ActionResult Index(int? page)
         {
             int pageSize = 8; // số sản phẩm trên 1 trang

@@ -13,10 +13,10 @@ namespace BanVaLi.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class WebBanVaLiEntities : DbContext
+    public partial class WebBanVaLiEntities1 : DbContext
     {
-        public WebBanVaLiEntities()
-            : base("name=WebBanVaLiEntities")
+        public WebBanVaLiEntities1()
+            : base("name=WebBanVaLiEntities1")
         {
         }
     
@@ -25,6 +25,7 @@ namespace BanVaLi.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tAnhSP> tAnhSP { get; set; }
         public virtual DbSet<tChatLieu> tChatLieu { get; set; }
         public virtual DbSet<tDanhMucSP> tDanhMucSP { get; set; }
@@ -34,5 +35,6 @@ namespace BanVaLi.Models
         public virtual DbSet<tLoaiSP> tLoaiSP { get; set; }
         public virtual DbSet<tQuocGia> tQuocGia { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<UserGroup> UserGroup { get; set; }
     }
 }

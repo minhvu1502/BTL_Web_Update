@@ -1,0 +1,66 @@
+﻿@model List<BanVaLi.Models.Cart>
+@{
+    ViewBag.Title = "Giỏ hàng của bạn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>@ViewBag.Title</h2>
+
+@if (Model == null || Model.Count == 0)
+{
+    <p class="text-info text-center">
+        Giỏ hàng của bạn rỗng!
+    </p>
+}
+else
+{
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Hình</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Đơn giá</th>
+                            <th>Thành tiền</th>
+                            <th>
+                                <a href="@Url.Action("DeleteCartItem")" onclick="return confirm('Bạn có chắc muốn xóa hết các sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a>
+                            </th>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-center"><img src="@Url.Content("~/Images/Images/" + item.Hinh)" width="70" height="60" /> </td>
+                                <td><a target="_blank" href="@Url.Action("ProductDetail", "DanhMucSp", new {@MaSP = item.SanPhamID})"> @item.TenSanPham </a> </td>
+                                <td>
+                                    <form action="@Url.Action("EditCount")" method="get">
+                                        <input type="hidden" name="MaSP" value="@item.SanPhamID" />
+                                        <input type="number" min="1" step="1" name="soluongmoi" value="@item.SoLuong" />
+                                        <button type="submit" class="btn btn-primary btn-sm"> Cập nhật </button>
+                                    </form>
+                                </td>
+                                <td> @item.DonGia VNĐ </td>
+                                <td> @item.ThanhTien VNĐ </td>
+
+                                <td> <a href="@Url.Action("DeleteCartItem", new {@MaSP = item.SanPhamID})" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a> </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td></td>
+                            <td class="text-right">Tổng số lượng:</td>
+                            <td> @Model.Sum(m => m.SoLuong) </td>
+                            <td class="text-right">Tổng thành tiền:</td>
+                            <td>@Model.Sum(m => m.ThanhTien) VNĐ </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+}

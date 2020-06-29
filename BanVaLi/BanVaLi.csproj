@@ -137,13 +137,16 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\DanhMucSpAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoaiSpAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\SearchController.cs" />
+    <Compile Include="Common\Base.cs" />
     <Compile Include="Common\SessionConstant.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\AnhSpController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ChatLieuController.cs" />
     <Compile Include="Controllers\DanhMucSpController.cs" />
     <Compile Include="Controllers\HangSxController.cs" />
@@ -151,54 +154,62 @@
     <Compile Include="Controllers\KichThuocController.cs" />
     <Compile Include="Controllers\LoaiDtController.cs" />
     <Compile Include="Controllers\LoaiSpController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\QuocGiaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\DAO\UserDao.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Metadatas\tDanhMucSP.Metadata.cs" />
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>WebBanVaLi.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tAnhSP.cs">
-      <DependentUpon>WebBanVali.tt</DependentUpon>
+      <DependentUpon>WebBanVaLi.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tChatLieu.cs">
-      <DependentUpon>WebBanVali.tt</DependentUpon>
+      <DependentUpon>WebBanVaLi.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tDanhMucSP.cs">
-      <DependentUpon>WebBanVali.tt</DependentUpon>
+      <DependentUpon>WebBanVaLi.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tHangSX.cs">
-      <DependentUpon>WebBanVali.tt</DependentUpon>
+      <DependentUpon>WebBanVaLi.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tKichThuoc.cs">
-      <DependentUpon>WebBanVali.tt</DependentUpon>
+      <DependentUpon>WebBanVaLi.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tLoaiDT.cs">
-      <DependentUpon>WebBanVali.tt</DependentUpon>
+      <DependentUpon>WebBanVaLi.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tLoaiSP.cs">
-      <DependentUpon>WebBanVali.tt</DependentUpon>
+      <DependentUpon>WebBanVaLi.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tQuocGia.cs">
-      <DependentUpon>WebBanVali.tt</DependentUpon>
+      <DependentUpon>WebBanVaLi.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>WebBanVali.tt</DependentUpon>
+      <DependentUpon>WebBanVaLi.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\WebBanVali.Context.cs">
+    <Compile Include="Models\UserGroup.cs">
+      <DependentUpon>WebBanVaLi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WebBanVaLi.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>WebBanVali.Context.tt</DependentUpon>
+      <DependentUpon>WebBanVaLi.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\WebBanVali.cs">
+    <Compile Include="Models\WebBanVaLi.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>WebBanVali.tt</DependentUpon>
+      <DependentUpon>WebBanVaLi.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\WebBanVali.Designer.cs">
+    <Compile Include="Models\WebBanVaLi.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>WebBanVali.edmx</DependentUpon>
+      <DependentUpon>WebBanVaLi.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1518,25 +1529,18 @@
     <Content Include="Images\Images\vi-roncato-orizzontale-nau-da-bo-780.jpg" />
     <Content Include="Images\Images\vi-roncato-orizzontale-nau-da-bo-838.jpg" />
     <Content Include="Images\Images\vi-roncato-orizzontale-nau-da-bo-92.jpg" />
-    <Content Include="Models\WebBanVali.Context.tt">
+    <Content Include="Models\WebBanVaLi.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WebBanVali.edmx</DependentUpon>
-      <LastGenOutput>WebBanVali.Context.cs</LastGenOutput>
+      <DependentUpon>WebBanVaLi.edmx</DependentUpon>
+      <LastGenOutput>WebBanVaLi.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\WebBanVali.tt">
+    <Content Include="Models\WebBanVaLi.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WebBanVali.edmx</DependentUpon>
-      <LastGenOutput>WebBanVali.cs</LastGenOutput>
+      <DependentUpon>WebBanVaLi.edmx</DependentUpon>
+      <LastGenOutput>WebBanVaLi.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\WebBanVali.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>WebBanVali.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\WebBanVali.edmx.diagram">
-      <DependentUpon>WebBanVali.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
@@ -1556,6 +1560,14 @@
     <Content Include="Areas\Admin\Views\DanhMucSpAdmin\EditProduct.cshtml" />
     <Content Include="Areas\Admin\Views\Search\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Search\SearchResult.cshtml" />
+    <EntityDeploy Include="Models\WebBanVaLi.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WebBanVaLi.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\WebBanVaLi.edmx.diagram">
+      <DependentUpon>WebBanVaLi.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1588,6 +1600,8 @@
     <Content Include="Views\DanhMucSp\Index.cshtml" />
     <Content Include="Views\QuocGia\GetAll.cshtml" />
     <Content Include="Views\DanhMucSp\GetProductByCountry.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

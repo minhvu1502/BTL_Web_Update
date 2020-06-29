@@ -11,7 +11,7 @@ namespace BanVaLi.Areas.Admin.Controllers
 {
     public class SearchController : Controller
     {
-        WebBanVaLiEntities db = new WebBanVaLiEntities();
+        WebBanVaLiEntities1 db = new WebBanVaLiEntities1();
         // GET: Admin/SearchController
         public ActionResult Index()
         {

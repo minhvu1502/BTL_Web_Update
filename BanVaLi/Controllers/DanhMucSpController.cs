@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using BanVaLi.Common;
 using BanVaLi.Models;
 using PagedList;
 using PagedList.Mvc;
@@ -13,7 +14,7 @@ namespace BanVaLi.Controllers
 {
     public class DanhMucSpController : Controller
     {
-        WebBanVaLiEntities db = new WebBanVaLiEntities();
+        WebBanVaLiEntities1 db = new WebBanVaLiEntities1();
         // GET: DanhMucSp
         public ActionResult Index()
         {
@@ -68,6 +69,19 @@ namespace BanVaLi.Controllers
                 return null;
             }
             return View(sanpham);
+        }
+
+        public ActionResult CheckLogin()
+        {
+            var x = HttpContext.Session[SessionConstant.SESSION_USER];
+            if (x == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }

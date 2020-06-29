@@ -12,7 +12,7 @@ namespace BanVaLi.Areas.Admin.Controllers
 {
     public class DanhMucSpAdminController : BaseController
     {
-        WebBanVaLiEntities db = new WebBanVaLiEntities();
+        WebBanVaLiEntities1 db = new WebBanVaLiEntities1();
         // GET: Admin/DanhMucSpAdmin
         public ActionResult Index()
         {
@@ -169,5 +169,9 @@ namespace BanVaLi.Areas.Admin.Controllers
             TempData["check"] = "Xoa";
             return RedirectToAction("DanhSachSanPham", new { @MaLoai = maloai});
         }
+    }
+
+    internal class WebBanVaLiEntities
+    {
     }
 }

@@ -12,7 +12,7 @@ namespace BanVaLi.Areas.Admin.Controllers
 
     public class HomeController : BaseController
     {
-        WebBanVaLiEntities db = new WebBanVaLiEntities();
+        WebBanVaLiEntities1 db = new WebBanVaLiEntities1();
 
         // GET: Admin/Home
         public ActionResult Index()

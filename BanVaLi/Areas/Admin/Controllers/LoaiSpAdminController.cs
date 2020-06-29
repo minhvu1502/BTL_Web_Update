@@ -9,7 +9,7 @@ namespace BanVaLi.Areas.Admin.Controllers
 {
     public class LoaiSpAdminController : Controller
     {
-        WebBanVaLiEntities db = new WebBanVaLiEntities();
+        WebBanVaLiEntities1 db = new WebBanVaLiEntities1();
         // GET: Admin/LoaiSpAdmin
         public ActionResult Index()
         {

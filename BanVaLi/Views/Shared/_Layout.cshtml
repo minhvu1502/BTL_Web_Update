@@ -1,5 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using BanVaLi.Common
+@using BanVaLi.Models
+<!DOCTYPE html>
 <html lang="en">
+@{
+    List<Cart> x = (List<Cart>) @Session[SessionConstant.SESSION_CART];
+}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,44 +12,140 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/Site.css">
-    @RenderSection("style", required:false)
+    @RenderSection("style", required: false)
+    <style>
+        .cart i:hover {
+            text-decoration: none;
+            color: #d60e96;
+        }
+
+        ul li .cart .cart-basket {
+            font-size: .6rem;
+            position: absolute;
+            top: 4px;
+            right: -5px;
+            width: 15px;
+            height: 15px;
+            color: #fff;
+            background-color: #418deb;
+            border-radius: 50%;
+        }
+        .drop {
+            display: none;
+            z-index: 1;
+        }
+        .cart:hover .drop {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="@Url.Action("Index", "Home")">MV Shop</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Shop</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownId">
-                        <a class="dropdown-item" href="#">Action 1</a>
-                        <a class="dropdown-item" href="#">Action 2</a>
-                    </div>
-                </li>
-            </ul>
-            @*@using (Html.BeginForm("SearchResult", "Search", FormMethod.Post,htmlAttributes:new {@class= "form-inline my-2 my-lg-0" }))
-            {
-                @Html.TextBox("txt_search", "", htmlAttributes: new { @class = "form-control mr-sm-2", @placeholder = "Search" })
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            }*@
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        </div>
-    </nav>
-</header>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">MV Shop</a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Shop</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="#">Action 1</a>
+                            <a class="dropdown-item" href="#">Action 2</a>
+                        </div>
+                    </li>
+                </ul>
+                @*@using (Html.BeginForm("SearchResult", "Search", FormMethod.Post,htmlAttributes:new {@class= "form-inline my-2 my-lg-0" }))
+                    {
+                        @Html.TextBox("txt_search", "", htmlAttributes: new { @class = "form-control mr-sm-2", @placeholder = "Search" })
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    }*@
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
+                    <li class="nav-item" id="login">
+                        <a class="nav-link" href="@Url.Action("Login", "Login")">Đăng Nhập</a>
+                    </li>
+                    <li class="nav-item" id="user">
+                        <a class="nav-link" href="#" id="username">@Session[SessionConstant.SESSION_USERNAME]</a>
+                    </li>
+                    <li class="nav-item" id="logout">
+                        <a class="nav-link" href="@Url.Action("Logout", "Login")">Đăng Xuất</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cart" href="@Url.Action("Index", "Cart")" style="position: relative"> 
+                            <i class="fa fa-shopping-cart" id="cart"></i>
+                            @{
+                                if (x != null)
+                                {
+                                    <span class="cart-basket d-flex align-items-center justify-content-center">
+                                        @x.Count
+                                    </span>
+                                    <div class="drop row" style="position: absolute; background-color: aquamarine; right: 0">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered">
+                                                        <tr>
+                                                            <th>Hình</th>
+                                                            <th>Tên sản phẩm</th>
+                                                            <th>Đơn giá</th>
+                                                            <th>
+                                                                <a href="@Url.Action("DeleteCartItem","Cart")" onclick="return confirm('Bạn có chắc muốn xóa hết các sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a>
+                                                            </th>
+                                                        </tr>
+                                                        @{
+                                                            if (x.Count != 0)
+                                                            {
+                                                                foreach (var item in x)
+                                                                {
+                                                                    <tr>
+                                                                        <td class="text-center"><img src="@Url.Content("~/Images/Images/" + item.Hinh)" width="70" height="60" /> </td>
+                                                                        <td><a target="_blank" href="@Url.Action("ProductDetail", "DanhMucSp", new {@MaSP = item.SanPhamID})"> @item.TenSanPham </a> </td>
+                                                                        <td> @item.DonGia VNĐ </td>
+                                                                        <td> <a href="@Url.Action("DeleteCartItem", "Cart", new {@MaSP = item.SanPhamID})" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a> </td>
+                                                                    </tr>
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                <tr>
+                                                                    <td colspan="4" class="text-center">Chưa có Sản Phẩm Nào</td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    </table>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span class="cart-basket d-flex align-items-center justify-content-center">
+                                        0
+                                    </span>
+                                }
+                            }
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
 
     <main>
         <div class="wrapper">
@@ -73,22 +174,22 @@
                     <li>
                         <a href="#">About</a>
                         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Sản Phẩm</a>
-                        <ul class="collapse list-unstyled" id="pageSubmenu" >
+                        <ul class="collapse list-unstyled" id="pageSubmenu">
                             @Html.Action("DanhMucSanPham", "LoaiSp")
                         </ul>
                     </li>
                     <li>
-                        <a  href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Quốc Gia</a>
-                        <ul  class="collapse list-unstyled" id="pageSubmenu1">
-                            @Html.Action("GetAll","QuocGia")
+                        <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Quốc Gia</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu1">
+                            @Html.Action("GetAll", "QuocGia")
                         </ul>
                     </li>
                     <li>
                         <a href="#">Contact</a>
                     </li>
-                    <li>
-                        <a href="~/Admin">Admin</a>
-                    </li>
+                    @*<li>
+                            <a href="~/Admin">Admin</a>
+                        </li>*@
                 </ul>
             </nav>
 
@@ -260,10 +361,34 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-                $(this).toggleClass('active');
+            $('#cartlist').css('display', 'none');
+            $('#cart').hover(function() {
+                $('#cartlist').css('display', 'block');
             });
+            $('#cart').mouseout(function() {
+                $('#cartlist').css('display', 'none');
+            });
+            //$('#cart').mouseleave(function () {
+            //    $('#cartlist').css('display', 'none');
+            //});
+            $('#sidebarCollapse').on('click',
+                function () {
+                    $('#sidebar').toggleClass('active');
+                    $(this).toggleClass('active');
+                });
+            debugger;
+            var data = $('#username').text();
+            if (data !== "") {
+                $('#user').show();
+                $('#login').hide();
+                $('#logout').show();
+            }
+            if (data === "") {
+                $('#user').hide();
+                $('#login').show();
+                $('#logout').hide();
+            }
+
         });
     </script>
 </body>

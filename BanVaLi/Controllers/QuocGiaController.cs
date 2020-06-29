@@ -9,13 +9,12 @@ namespace BanVaLi.Controllers
 {
     public class QuocGiaController : Controller
     {
-        WebBanVaLiEntities db = new WebBanVaLiEntities();
+        WebBanVaLiEntities1 db = new WebBanVaLiEntities1();
         // GET: QuocGia
         public ActionResult Index()
         {
             return View();
         }
-
         public PartialViewResult GetAll()
         {
             return PartialView(db.tQuocGia.ToList());

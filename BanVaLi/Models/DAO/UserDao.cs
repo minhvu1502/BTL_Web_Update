@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using BanVaLi.Common;
 
 namespace BanVaLi.Models.DAO
 {
     public class UserDao
     {
-        WebBanVaLiEntities db = new WebBanVaLiEntities();
+        WebBanVaLiEntities1 db = new WebBanVaLiEntities1();
 
         public long Insert(User user)
         {
@@ -31,6 +32,20 @@ namespace BanVaLi.Models.DAO
         public User GetByName(string username)
         {
             return db.User.SingleOrDefault(x => x.Username == username);
+        }
+
+        public bool GetRoleUser(string username)
+        {
+            var user = db.User.FirstOrDefault(x => x.Username == username);
+            var user_group = db.UserGroup.FirstOrDefault(x => x.ID == user.UserGroup_ID);
+            if (user_group.Code == Base.IS_ADMIN)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

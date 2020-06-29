@@ -12,16 +12,19 @@ namespace BanVaLi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class UserGroup
     {
-        public long ID { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Name { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public Nullable<long> UserGroup_ID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public UserGroup()
+        {
+            this.User = new HashSet<User>();
+        }
     
-        public virtual UserGroup UserGroup { get; set; }
+        public long ID { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> User { get; set; }
     }
 }
