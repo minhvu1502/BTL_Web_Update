@@ -156,6 +156,7 @@
     <Compile Include="Controllers\LoaiSpController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\QuocGiaController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -196,6 +197,7 @@
     <Compile Include="Models\UserGroup.cs">
       <DependentUpon>WebBanVaLi.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserRegister.cs" />
     <Compile Include="Models\WebBanVaLi.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1602,6 +1604,7 @@
     <Content Include="Views\DanhMucSp\GetProductByCountry.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

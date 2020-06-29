@@ -2,6 +2,7 @@
     ViewBag.Title = "Home Page";
 
 }
+@using BanVaLi.Common
 @using PagedList.Mvc
 @model PagedList.IPagedList<BanVaLi.Models.tDanhMucSP>
 <h1>@TempData["Message"]</h1>
@@ -62,7 +63,16 @@
                                 $16.00
                                 <span>$20.00</span>
                             </div>
-                            <a class="add-to-cart" href="">+ Add To Cart</a>
+                            @{
+                                if (Session[SessionConstant.SESSION_USER] == null)
+                                {
+                                    <a class="add-to-cart" href="@Url.Action("CheckLogin","DanhMucSp")">+ Add To Cart</a>
+                                }
+                                else
+                                {
+                                    <a class="add-to-cart" href="@Url.Action("Index", "Cart", new {@MaSP = item.MaSP})">+ Add To Cart</a>
+                                }
+                            }
                         </div>
                     </div>
                 </div>

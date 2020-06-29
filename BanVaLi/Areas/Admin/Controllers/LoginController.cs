@@ -26,23 +26,30 @@ namespace BanVaLi.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel model)
         {
-            if (ModelState.IsValid)
+            UserDao userDao = new UserDao();
+            var result = userDao.Login(model.Username, model.Password);
+            if (result)
             {
-                UserDao userDao = new UserDao();
-                var result = userDao.Login(model.Username, model.Password);
-                if (result)
+                var user = userDao.GetByName(model.Username);
+                var CheckRole = userDao.GetRoleUser(user.Username);
+                UserLogin userLogin = new UserLogin();
+                userLogin.UserID = user.ID;
+                userLogin.Username = user.Username;
+                Session.Add(SessionConstant.SESSION_USER, userLogin);
+                Session.Add(SessionConstant.SESSION_USERNAME, userLogin.Username);
+                if (CheckRole == true)
                 {
-                    var user = userDao.GetByName(model.Username);
-                    UserLogin userLogin = new UserLogin();
-                    userLogin.UserID = user.ID;
-                    userLogin.Username = user.Username;
-                    Session.Add(SessionConstant.SESSION_USER, userLogin);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "HomeAdmin", new { area = "Admin"});
                 }
                 else
                 {
-                    ModelState.AddModelError("","Đăng nhập thất bại");
+
+                    return RedirectToAction("Index", "Home", new {area = ""});
                 }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Đăng nhập thất bại");
             }
             return View();
         }

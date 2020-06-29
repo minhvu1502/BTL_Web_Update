@@ -76,6 +76,9 @@
                     <li class="nav-item" id="login">
                         <a class="nav-link" href="@Url.Action("Login", "Login")">Đăng Nhập</a>
                     </li>
+                    <li class="nav-item" id="register">
+                        <a class="nav-link" href="@Url.Action("Register", "User")">Đăng Kí</a>
+                    </li>
                     <li class="nav-item" id="user">
                         <a class="nav-link" href="#" id="username">@Session[SessionConstant.SESSION_USERNAME]</a>
                     </li>
@@ -376,17 +379,18 @@
                     $('#sidebar').toggleClass('active');
                     $(this).toggleClass('active');
                 });
-            debugger;
             var data = $('#username').text();
             if (data !== "") {
                 $('#user').show();
                 $('#login').hide();
                 $('#logout').show();
+                $('#register').hide();
             }
             if (data === "") {
                 $('#user').hide();
                 $('#login').show();
                 $('#logout').hide();
+                $('#register').show();
             }
 
         });
