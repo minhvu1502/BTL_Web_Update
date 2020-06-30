@@ -37,6 +37,7 @@ namespace BanVaLi.Controllers
                 ViewBag.Error = "Không có sản phẩm nào thuộc loại này";
             }
             ViewBag.Name = tLoaiSp.Loai;
+            ViewBag.MaLoai = tLoaiSp.MaLoai;
             return View(db.tDanhMucSP.Where(n=>n.MaLoai == MaLoai).OrderBy(n=>n.TenSP).ToList().ToPagedList(pageNumber, pageSize));
         }
 

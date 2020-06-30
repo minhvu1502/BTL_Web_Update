@@ -142,7 +142,10 @@
     <Compile Include="Areas\Admin\Controllers\LoaiSpAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\SearchController.cs" />
+    <Compile Include="Areas\Models\SanPham\SanPhamDelete.cs" />
+    <Compile Include="Areas\Models\SanPham\SanPhamEdit.cs" />
     <Compile Include="Common\Base.cs" />
+    <Compile Include="Common\Result.cs" />
     <Compile Include="Common\SessionConstant.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\AnhSpController.cs" />
@@ -164,6 +167,12 @@
     <Compile Include="Models\DAO\UserDao.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Metadatas\tDanhMucSP.Metadata.cs" />
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>WebBanVaLi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>WebBanVaLi.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>WebBanVaLi.tt</DependentUpon>
     </Compile>
@@ -1558,10 +1567,10 @@
     <Content Include="Areas\Admin\Views\DanhMucSpAdmin\DanhSachSanPham.cshtml" />
     <Content Include="Areas\Admin\Views\DanhMucSpAdmin\ProductDetail.cshtml" />
     <Content Include="Areas\Admin\Views\DanhMucSpAdmin\Xoa.cshtml" />
-    <Content Include="Areas\Admin\Views\DanhMucSpAdmin\CreateProduct.cshtml" />
     <Content Include="Areas\Admin\Views\DanhMucSpAdmin\EditProduct.cshtml" />
     <Content Include="Areas\Admin\Views\Search\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Search\SearchResult.cshtml" />
+    <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
     <EntityDeploy Include="Models\WebBanVaLi.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WebBanVaLi.Designer.cs</LastGenOutput>
@@ -1569,7 +1578,8 @@
     <Content Include="Models\WebBanVaLi.edmx.diagram">
       <DependentUpon>WebBanVaLi.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DanhMucSpAdmin\CreateProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\DanhMucSpAdmin\PartialViewModal.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

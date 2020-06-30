@@ -40,6 +40,7 @@ namespace BanVaLi.Models
         public string MaLoai { get; set; }
         public string MaDT { get; set; }
         public string Anh { get; set; }
+        public Nullable<bool> Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tAnhSP> tAnhSP { get; set; }

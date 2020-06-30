@@ -1,13 +1,11 @@
 ﻿@using BanVaLi.Models
 @using PagedList.Mvc
 @{
+    const int ACTIVATE = 1;
+    const int DEACTIVATE = 0;
     ViewBag.Title = "ChuDeSanPham";
-    if (TempData["check"] == "Xoa")
-    {
-        Response.Write("<script>alert('Delete Successfully')</script>");
-    }
 }
-@model PagedList.IPagedList<tDanhMucSP>
+@model List<tDanhMucSP>
 <style>
     #HinhAnh {
         height: 100px
@@ -22,88 +20,133 @@
         float: left
     }
 </style>
-<h2>@ViewBag.Name</h2>
-<div style="width: 100%">
-    @*@{
-            int i = 0;
-            foreach (var item in Model)
-            {
-                i++;
-                <div id="SanPham">
-                    <a href="@Url.Action("ProductDetail","DanhMucSp",new { @MaSP = item.MaSP})">
-                        <div id="HinhAnh">
-                            <img src=" @Url.Content("~/Images/Images/" +item.Anh)" width="100" height="150" />
-                        </div>
-                    </a>
-                    <div id="ThongTin">
-                        <div title="@item.TenSP">@item.TenSP</div>
-                    </div>
-                </div>
-                if (i % 4 == 0)
-                {
-                    <div style="clear:both"></div>
+<script>
+    $(document).ready(function() {
+
+    });
+
+    function Edit(maSp) {
+        var url = '@Url.Action("PartialViewModal")/?MaSP=' + maSp;
+        $.get(url,
+            function(data) {
+                $('.container').html(data);
+                $('#myModal').modal({ backdrop: 'static', keyboard: false });
+            });
+        @*var x = {
+            "MaSP": maSp
+        }
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("PartialViewModal")',
+            data: x,
+            dataType: 'json',
+            success: function(data) {
+                $('.container').html(data);
+                $('#myModal').modal('show');
+            },
+            error: function() {
+
+            }
+        });*@
+
+    }
+    function Delete(maSp) {
+        var x = {
+            "MaSP": maSp
+        }
+        $.confirm({
+            text: "Are you sure you want to delete that comment?",
+            title: "Confirmation required",
+            buttons: {
+                confirm: {
+                    text: "Xác Nhận",
+                    action: function() {
+                        $.ajax({
+                            type: "GET",
+                            url: '@Url.Action("ConfirmDelete")',
+                            data: x,
+                            dataType: "json",
+                            success: function(result) {
+                                alert(result.ErrorMessage);
+                                location.reload();
+                            },
+                            error: function() {
+
+                            }
+                        });
+                    }
+                },
+                cancel: {
+                    text: "Hủy Bỏ",
+                    action: function() {
+
+                    }
                 }
             }
-        }*@
-    <div class="row">
-        @{
-            int i = 0;
-            foreach (var item in Model)
-            {
-                i++;
-                <div class="col-md-3 col-sm-6">
-                    <div class="product-grid">
-                        <div class="product-image">
-                            <a href="#">
-                                <img class="pic-1" src="@Url.Content("~/Images/Images/"+item.Anh)">
-                                <img class="pic-2" src="@Url.Content("~/Images/Images/"+item.Anh)">
-                            </a>
-                            <ul class="social">
-                                <li><a href="@Url.Action("ProductDetail", new {@MaSP = item.MaSP})" data-tip="Details"><i class="fa fa-search"></i></a></li>
-                                <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-                                <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                            <span class="product-new-label">Sale</span>
-                            <span class="product-discount-label">20%</span>
-                        </div>
-                        <ul class="rating">
-                            <li class="fa fa-star"></li>
-                            <li class="fa fa-star"></li>
-                            <li class="fa fa-star"></li>
-                            <li class="fa fa-star"></li>
-                            <li class="fa fa-star disable"></li>
-                        </ul>
-                        <div class="product-content">
-                            <h3 class="title"><a href="#">@item.TenSP</a></h3>
-                            <div class="price">
-                                $16.00
-                                <span>$20.00</span>
-                            </div>
-                            <a class="add-to-cart" href="">+ Add To Cart</a>
-                        </div>
-                    </div>
-                </div>
+        });
+    }
+</script>
+<h2>@ViewBag.Name</h2>
+<div class="container">
+    <button type="button" class="btn btn-success text"><a class="" style="color: black" href="@Url.Action("CreateProduct")"><i class="fa fa-plus"></i></a></button>
+    <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable Example</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Mã SP</th>
+                            <th>Tên SP</th>
+                            <th>Giá</th>
+                            <th>Loại</th>
+                            <th>Trạng Thái</th>
+                            <th>
+                                Action <br />
 
-            }
-        }
-    </div>
-    <button type="button" class="btn btn-success text"><a class="text" href="@Url.Action("CreateProduct")">Add</a></button>
-    @Html.PagedListPager(Model, page => Url.Action("DanhSachSanPham", new { page = page }),new PagedListRenderOptions()
-    {
-        LiElementClasses = new string[] { "page-item" },
-   
-    })
-    @*<div class="row">
-        <div class="col" align="center">
-            Trang @(Model.PageCount<Model.PageNumber?0: Model.PageNumber)/@Model.PageCount
-
-            <nav aria-label="Page navigation example">
-                <ul class="pagination" style="display: inline-block;list-style-type: none;">
-                    <li class="page-item">
-                        
-                    </li>
-                </ul>
-            </nav>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Mã SP</th>
+                            <th>Tên SP</th>
+                            <th>Giá</th>
+                            <th>Loại</th>
+                            <th>Trạng Thái</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @{
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.MaSP</td>
+                                    <td>@item.TenSP</td>
+                                    <td>@item.Gia</td>
+                                    <td>@item.MaLoai</td>
+                                    @if (item.Status == true)
+                                    {
+                                        <td class="text-center"><a href="javascript:void(0)" class="badge badge-success">Active</a></td>
+                                    }
+                                    else
+                                    {
+                                        <td class="text-center"><a href="javascript:void(0)" class="badge badge-danger">Deactive</a></td>
+                                    }
+                                    <td>
+                                        <button id="edit" onclick="Edit('@item.MaSP.Trim()')" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                                        <button class="btn btn-danger delete" onclick="Delete('@item.MaSP.Trim()')"><i class="fa fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>*@
+    </div>
 </div>
+
+
+

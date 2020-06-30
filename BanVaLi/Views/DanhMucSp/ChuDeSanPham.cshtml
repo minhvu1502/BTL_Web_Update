@@ -58,7 +58,7 @@
                             <ul class="social">
                                 <li><a href="@Url.Action("ProductDetail", new {@MaSP = item.MaSP})" data-tip="Details"><i class="fa fa-search"></i></a></li>
                                 @*<li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-                                <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>*@
+                                    <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>*@
                             </ul>
                             <span class="product-new-label">Sale</span>
                             <span class="product-discount-label">20%</span>
@@ -79,11 +79,11 @@
                             @{
                                 if (Session[SessionConstant.SESSION_USER] == null)
                                 {
-                                                        <a class="add-to-cart" href="@Url.Action("CheckLogin")">+ Add To Cart</a>
+                                    <a class="add-to-cart" href="@Url.Action("CheckLogin")">+ Add To Cart</a>
                                 }
                                 else
                                 {
-                        <a class="add-to-cart" href="@Url.Action("Index", "Cart", new {@MaSP = item.MaSP})">+ Add To Cart</a>
+                                    <a class="add-to-cart" href="@Url.Action("Index", "Cart", new {@MaSP = item.MaSP})">+ Add To Cart</a>
                                 }
                             }
                         </div>
@@ -92,10 +92,8 @@
             }
         }
     </div>
-    @Html.PagedListPager(Model, page => Url.Action("ChuDeSanPham", new { page = page }))
-    <div class="row">
-        <div class="col" align="center">
-            Trang @(Model.PageCount<Model.PageNumber?0: Model.PageNumber)/@Model.PageCount
-        </div>
+    <div align="center">
+        @Html.PagedListPager(Model, page => Url.Action("ChuDeSanPham", new { page = page, @MaLoai = ViewBag.MaLoai }))
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
     </div>
 </div>

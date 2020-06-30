@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="31e331ecfbb24b318a66f5be460a3b00" Name="Diagram1">
+      <Diagram DiagramId="10502661a89044cba034abd4b6561831" Name="Diagram1">
         <EntityTypeShape EntityType="WebBanVaLiModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebBanVaLiModel.tAnhSP" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebBanVaLiModel.tChatLieu" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanVaLiModel.tAnhSP" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanVaLiModel.tChatLieu" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="WebBanVaLiModel.tDanhMucSP" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebBanVaLiModel.tHangSX" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebBanVaLiModel.tKichThuoc" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebBanVaLiModel.tLoaiDT" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebBanVaLiModel.tLoaiSP" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebBanVaLiModel.tQuocGia" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanVaLiModel.tHangSX" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanVaLiModel.tKichThuoc" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanVaLiModel.tLoaiDT" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanVaLiModel.tLoaiSP" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanVaLiModel.tQuocGia" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="WebBanVaLiModel.User" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="WebBanVaLiModel.UserGroup" Width="1.5" PointX="7.75" PointY="1.375" IsExpanded="true" />
         <AssociationConnector Association="WebBanVaLiModel.FK_tAnhSP_tDanhMucSP" ManuallyRouted="false" />
