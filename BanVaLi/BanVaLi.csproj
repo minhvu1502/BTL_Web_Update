@@ -144,6 +144,7 @@
     <Compile Include="Areas\Admin\Controllers\SearchController.cs" />
     <Compile Include="Areas\Models\SanPham\SanPhamDelete.cs" />
     <Compile Include="Areas\Models\SanPham\SanPhamEdit.cs" />
+    <Compile Include="Areas\Models\SanPham\StatusEdit.cs" />
     <Compile Include="Common\Base.cs" />
     <Compile Include="Common\Result.cs" />
     <Compile Include="Common\SessionConstant.cs" />
@@ -207,6 +208,7 @@
       <DependentUpon>WebBanVaLi.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserRegister.cs" />
+    <Compile Include="Models\UserModel\UserEdit.cs" />
     <Compile Include="Models\WebBanVaLi.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1615,6 +1617,7 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\UserDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

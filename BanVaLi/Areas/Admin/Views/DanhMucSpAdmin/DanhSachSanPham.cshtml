@@ -20,77 +20,12 @@
         float: left
     }
 </style>
-<script>
-    $(document).ready(function() {
 
-    });
-
-    function Edit(maSp) {
-        var url = '@Url.Action("PartialViewModal")/?MaSP=' + maSp;
-        $.get(url,
-            function(data) {
-                $('.container').html(data);
-                $('#myModal').modal({ backdrop: 'static', keyboard: false });
-            });
-        @*var x = {
-            "MaSP": maSp
-        }
-        $.ajax({
-            type: 'GET',
-            url: '@Url.Action("PartialViewModal")',
-            data: x,
-            dataType: 'json',
-            success: function(data) {
-                $('.container').html(data);
-                $('#myModal').modal('show');
-            },
-            error: function() {
-
-            }
-        });*@
-
-    }
-    function Delete(maSp) {
-        var x = {
-            "MaSP": maSp
-        }
-        $.confirm({
-            text: "Are you sure you want to delete that comment?",
-            title: "Confirmation required",
-            buttons: {
-                confirm: {
-                    text: "Xác Nhận",
-                    action: function() {
-                        $.ajax({
-                            type: "GET",
-                            url: '@Url.Action("ConfirmDelete")',
-                            data: x,
-                            dataType: "json",
-                            success: function(result) {
-                                alert(result.ErrorMessage);
-                                location.reload();
-                            },
-                            error: function() {
-
-                            }
-                        });
-                    }
-                },
-                cancel: {
-                    text: "Hủy Bỏ",
-                    action: function() {
-
-                    }
-                }
-            }
-        });
-    }
-</script>
 <h2>@ViewBag.Name</h2>
 <div class="container">
     <button type="button" class="btn btn-success text"><a class="" style="color: black" href="@Url.Action("CreateProduct")"><i class="fa fa-plus"></i></a></button>
     <div class="card mb-4">
-        <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable Example</div>
+        <div class="card-header"><i class="fas fa-table mr-1"></i>Danh Sách Sản Phẩm</div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -128,11 +63,11 @@
                                     <td>@item.MaLoai</td>
                                     @if (item.Status == true)
                                     {
-                                        <td class="text-center"><a href="javascript:void(0)" class="badge badge-success">Active</a></td>
+                                        <td class="text-center"><button onclick="EditStatus('@ACTIVATE', '@item.MaSP')" class="badge badge-success">Active</button></td>
                                     }
                                     else
                                     {
-                                        <td class="text-center"><a href="javascript:void(0)" class="badge badge-danger">Deactive</a></td>
+                                        <td class="text-center"><button onclick="EditStatus('@DEACTIVATE', '@item.MaSP')" class="badge badge-danger">Deactive</button></td>
                                     }
                                     <td>
                                         <button id="edit" onclick="Edit('@item.MaSP.Trim()')" class="btn btn-warning"><i class="fa fa-edit"></i></button>
@@ -147,6 +82,90 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
 
+    });
 
+    function Edit(maSp) {
+        var url = '@Url.Action("PartialViewModal")/?MaSP=' + maSp;
+        $.get(url,
+            function(data) {
+                $('.container').html(data);
+                $('#myModal').modal({ backdrop: 'static', keyboard: false });
+            });
+    }
 
+    function EditStatus(status, maSp) {
+        var x = {
+            "Status": status,
+            "MaSP" : maSp
+        }
+        $.confirm({
+            content: "Are you sure change status?",
+            title: "Confirm",
+            buttons: {
+                confirm: {
+                    text: "Xác Nhận",
+                    action: function () {
+                        $.ajax({
+                            type: "GET",
+                            dataType: "json",
+                            data: x,
+                            url: "@Url.Action("EditStatus")",
+                            success: function (result) {
+                                var table = $('#myModal').DataTable();
+                                alert(result.ErrorMessage);
+                                location.reload();
+                            },
+                            error: function() {
+
+                            }
+                    });
+                    }
+                },
+                cancel: {
+                    text: "Cancel",
+                    action: function() {
+
+                    }
+    }
+            }
+        });
+    }
+    function Delete(maSp) {
+        var x = {
+            "MaSP": maSp
+        }
+        $.confirm({
+            content: "Are you sure you want to delete that comment?",
+            title: "Confirmation required",
+            buttons: {
+                confirm: {
+                    text: "Xác Nhận",
+                    action: function() {
+                        $.ajax({
+                            type: "GET",
+                            url: '@Url.Action("ConfirmDelete")',
+                            data: x,
+                            dataType: "json",
+                            success: function(result) {
+                                alert(result.ErrorMessage);
+                                location.reload();
+                            },
+                            error: function() {
+
+                            }
+                        });
+                    }
+                },
+                cancel: {
+                    text: "Hủy Bỏ",
+                    action: function() {
+
+                    }
+                }
+            }
+        });
+    }
+</script>

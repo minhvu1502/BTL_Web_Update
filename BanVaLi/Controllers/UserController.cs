@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using BanVaLi.Common;
 using BanVaLi.Models;
+using BanVaLi.Models.UserModel;
+using Newtonsoft.Json;
 
 namespace BanVaLi.Controllers
 {
@@ -22,6 +24,36 @@ namespace BanVaLi.Controllers
             return View();
         }
 
+        public ActionResult UserDetail(string username)
+        {
+            if (username == null && Session[SessionConstant.SESSION_USERNAME] != null)
+            {
+                username = (string)Session[SessionConstant.SESSION_USERNAME];
+            }
+
+            if (username == null && Session[SessionConstant.SESSION_USERNAME] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            var user = db.User.FirstOrDefault(x => x.Username == username);
+            return View(user);
+        }
+        [HttpPost]
+        public string EditUser(UserEdit user)
+        {
+            var model = db.User.FirstOrDefault(x => x.Username == user.Username);
+            model.Name = user.Name;
+            model.Email = user.Email;
+            model.Phone = user.Phone;
+            model.Password = user.NewPassword;
+            db.SaveChanges();
+            Result result = new Result()
+            {
+                ErrorCode = "0",
+                ErrorMessage = "Edit success"
+            };
+            return JsonConvert.SerializeObject(result);
+        }
         [HttpPost]
         public ActionResult Register(UserRegister model)
         {

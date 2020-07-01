@@ -17,7 +17,7 @@ namespace BanVaLi.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new {controller ="Login" ,action = "Login", id = UrlParameter.Optional },
+                new {controller ="HomeAdmin" ,action = "Index", id = UrlParameter.Optional },
                 namespaces: new string[] { "BanVaLi.Areas.Admin.Controllers" }
             );
         }

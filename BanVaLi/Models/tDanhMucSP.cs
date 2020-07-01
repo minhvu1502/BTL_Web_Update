@@ -11,7 +11,7 @@ namespace BanVaLi.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class tDanhMucSP
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +19,7 @@ namespace BanVaLi.Models
         {
             this.tAnhSP = new HashSet<tAnhSP>();
         }
-    
+
         public string MaSP { get; set; }
         public string TenSP { get; set; }
         public string MaChatLieu { get; set; }
@@ -41,7 +41,7 @@ namespace BanVaLi.Models
         public string MaDT { get; set; }
         public string Anh { get; set; }
         public Nullable<bool> Status { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tAnhSP> tAnhSP { get; set; }
         public virtual tChatLieu tChatLieu { get; set; }

@@ -23,10 +23,8 @@ namespace BanVaLi.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult DanhSachSanPham(int? page, string MaLoai ="All")
+        public ActionResult DanhSachSanPham(string MaLoai = "All")
         {
-            int pageSize = 8; // số sản phẩm trên 1 trang
-            int pageNumber = (page ?? 1); // số trang
             if (MaLoai == "All")
             {
                 return View(db.tDanhMucSP.OrderBy(n => n.TenSP).ToList());
@@ -47,7 +45,6 @@ namespace BanVaLi.Areas.Admin.Controllers
                 }
                 ViewBag.Name = tLoaiSp.Loai;
                 ViewBag.MaLoai = tLoaiSp.MaLoai;
-                ViewBag.Page = page;
                 return View(db.tDanhMucSP.Where(n => n.MaLoai == MaLoai).OrderBy(n => n.TenSP).ToList());
             }
         }
@@ -95,7 +92,7 @@ namespace BanVaLi.Areas.Admin.Controllers
                 var x = db.tDanhMucSP.Find(sanpham.MaSP);
                 if (x != null)
                 {
-                    ModelState.AddModelError("","Đã có sản phẩm này");
+                    ModelState.AddModelError("", "Đã có sản phẩm này");
                 }
                 else
                 {
@@ -156,7 +153,7 @@ namespace BanVaLi.Areas.Admin.Controllers
                 new SelectList(db.tLoaiDT.ToList().OrderBy(n => n.TenLoai), "MaDT", "TenLoai");
             return View(sanpham);
         }
-        
+
         [HttpPost]
         public ActionResult EditProduct(tDanhMucSP sanpham)
         {
@@ -164,7 +161,7 @@ namespace BanVaLi.Areas.Admin.Controllers
             {
                 db.Entry(sanpham).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("ProductDetail", new {@MaSP=sanpham.MaSP});
+                return RedirectToAction("ProductDetail", new { @MaSP = sanpham.MaSP });
             }
             return RedirectToAction("Index");
         }
@@ -238,7 +235,35 @@ namespace BanVaLi.Areas.Admin.Controllers
                 db.Entry(sanpham).State = EntityState.Modified;
                 db.SaveChanges();
             }
-            return RedirectToAction("DanhSachSanPham", new {@MaLoai = sanpham.MaLoai.Trim()});
+            return RedirectToAction("DanhSachSanPham", new { @MaLoai = sanpham.MaLoai.Trim() });
+        }
+
+        public string EditStatus(StatusEdit edit)
+        {
+            Result result = new Result();
+            var model = db.tDanhMucSP.First(x => x.MaSP == edit.MaSP);
+            if (edit.Status == "1")
+            {
+                model.Status = false;
+                db.SaveChanges();
+                result = new Result()
+                {
+                    ErrorCode = "0",
+                    ErrorMessage = "edit success"
+                };
+            }
+
+            if (edit.Status == "0")
+            {
+                model.Status = true;
+                db.SaveChanges();
+                result = new Result()
+                {
+                    ErrorCode = "0",
+                    ErrorMessage = "edit success"
+                };
+            }
+            return JsonConvert.SerializeObject(result);
         }
     }
 

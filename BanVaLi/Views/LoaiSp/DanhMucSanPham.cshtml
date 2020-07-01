@@ -6,10 +6,10 @@
 @{
     foreach (var item in Model)
     {
-    <li>
-        @{
-            <a href="@Url.Action("ChuDeSanPham","DanhMucSp",new {@MaLoai = item.MaLoai})">@item.Loai</a>;
-        }
-    </li>
-        }
+        <li>
+            @{
+                <a href="@Url.Action("ChuDeSanPham","DanhMucSp",new {@MaLoai = item.MaLoai.Trim()})">@item.Loai</a>;
+            }
+        </li>
+    }
 }

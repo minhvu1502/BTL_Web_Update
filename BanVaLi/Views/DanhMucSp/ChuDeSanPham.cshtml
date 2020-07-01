@@ -13,9 +13,9 @@
     #SanPham {
         float: left;
         width: 100px;
-
     }
-    .pagination li{
+
+    .pagination li {
         float: left
     }
 </style>
@@ -56,7 +56,7 @@
                                 <img class="pic-2" src="@Url.Content("~/Images/Images/"+item.Anh)">
                             </a>
                             <ul class="social">
-                                <li><a href="@Url.Action("ProductDetail", new {@MaSP = item.MaSP})" data-tip="Details"><i class="fa fa-search"></i></a></li>
+                                <li><a href="@Url.Action("ProductDetail", new {@MaSP = item.MaSP.Trim()})" data-tip="Details"><i class="fa fa-search"></i></a></li>
                                 @*<li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
                                     <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>*@
                             </ul>
@@ -83,7 +83,7 @@
                                 }
                                 else
                                 {
-                                    <a class="add-to-cart" href="@Url.Action("Index", "Cart", new {@MaSP = item.MaSP})">+ Add To Cart</a>
+                                    <a class="add-to-cart" href="@Url.Action("Index", "Cart", new {@MaSP = item.MaSP.Trim()})">+ Add To Cart</a>
                                 }
                             }
                         </div>

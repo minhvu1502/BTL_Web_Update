@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 @{
-    List<Cart> x = (List<Cart>) @Session[SessionConstant.SESSION_CART];
+    List<Cart> x = (List<Cart>)@Session[SessionConstant.SESSION_CART];
 }
 <head>
     <meta charset="UTF-8">
@@ -33,128 +33,131 @@
             background-color: #418deb;
             border-radius: 50%;
         }
+
         .drop {
             display: none;
             z-index: 1;
         }
+
         .cart:hover .drop {
             display: block;
         }
     </style>
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <form class="form-inline ml-auto my-2 my-lg-0" action="" method="post">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </nav>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="@Url.Action("Index", "Home")">MV Shop</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Shop</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownId">
-                        <a class="dropdown-item" href="#">Action 1</a>
-                        <a class="dropdown-item" href="#">Action 2</a>
-                    </div>
-                </li>
-            </ul>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <form class="form-inline ml-auto my-2 my-lg-0" action="" method="post">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </nav>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">MV Shop</a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
 
-            @*<form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>*@
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item" id="login">
-                    <a class="nav-link" href="@Url.Action("Login", "Login")">Đăng Nhập</a>
-                </li>
-                <li class="nav-item" id="register">
-                    <a class="nav-link" href="@Url.Action("Register", "User")">Đăng Kí</a>
-                </li>
-                <li class="nav-item" id="user">
-                    <a class="nav-link" href="#" id="username">@Session[SessionConstant.SESSION_USERNAME]</a>
-                </li>
-                <li class="nav-item" id="logout">
-                    <a class="nav-link" href="@Url.Action("Logout", "Login")">Đăng Xuất</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link cart" href="@Url.Action("Index", "Cart")" style="position: relative">
-                        <i class="fa fa-shopping-cart" id="cart"></i>
-                        @{
-                            if (x != null)
-                            {
-                                <span class="cart-basket d-flex align-items-center justify-content-center">
-                                    @x.Count
-                                </span>
-                                <div class="drop row" style="position: absolute; background-color: aquamarine; right: 0">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered">
-                                                    <tr>
-                                                        <th>Hình</th>
-                                                        <th>Tên sản phẩm</th>
-                                                        <th>Đơn giá</th>
-                                                        <th>
-                                                            <a href="@Url.Action("DeleteCartItem", "Cart")" onclick="return confirm('Bạn có chắc muốn xóa hết các sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a>
-                                                        </th>
-                                                    </tr>
-                                                    @{
-                                                        if (x.Count != 0)
-                                                        {
-                                                            foreach (var item in x)
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="#">Action 1</a>
+                            <a class="dropdown-item" href="#">Action 2</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+
+                @*<form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>*@
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item" id="login">
+                        <a class="nav-link" href="@Url.Action("Login", "Login")">Đăng Nhập</a>
+                    </li>
+                    <li class="nav-item" id="register">
+                        <a class="nav-link" href="@Url.Action("Register", "User")">Đăng Kí</a>
+                    </li>
+                    <li class="nav-item" id="user">
+                        <a class="nav-link" href="@Url.Action("UserDetail", "User", new {@username = Session[SessionConstant.SESSION_USERNAME]})" id="username">@Session[SessionConstant.SESSION_USERNAME]</a>
+                    </li>
+                    <li class="nav-item" id="logout">
+                        <a class="nav-link" href="@Url.Action("Logout", "Login")">Đăng Xuất</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cart" href="@Url.Action("Index", "Cart")" style="position: relative">
+                            <i class="fa fa-shopping-cart" id="cart"></i>
+                            @{
+                                if (x != null)
+                                {
+                                    <span class="cart-basket d-flex align-items-center justify-content-center">
+                                        @x.Count
+                                    </span>
+                                    <div class="drop row" style="position: absolute; background-color: aquamarine; right: 0">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered">
+                                                        <tr>
+                                                            <th>Hình</th>
+                                                            <th>Tên sản phẩm</th>
+                                                            <th>Đơn giá</th>
+                                                            <th>
+                                                                <a href="@Url.Action("DeleteCartItem", "Cart")" onclick="return confirm('Bạn có chắc muốn xóa hết các sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a>
+                                                            </th>
+                                                        </tr>
+                                                        @{
+                                                            if (x.Count != 0)
+                                                            {
+                                                                foreach (var item in x)
+                                                                {
+                                                                    <tr>
+                                                                        <td class="text-center"><img src="@Url.Content("~/Images/Images/" + item.Hinh)" width="70" height="60" /> </td>
+                                                                        <td><a target="_blank" href="@Url.Action("ProductDetail", "DanhMucSp", new {@MaSP = item.SanPhamID})"> @item.TenSanPham </a> </td>
+                                                                        <td> @item.DonGia VNĐ </td>
+                                                                        <td> <a href="@Url.Action("DeleteCartItem", "Cart", new {@MaSP = item.SanPhamID})" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a> </td>
+                                                                    </tr>
+                                                                }
+                                                            }
+                                                            else
                                                             {
                                                                 <tr>
-                                                                    <td class="text-center"><img src="@Url.Content("~/Images/Images/" + item.Hinh)" width="70" height="60"/> </td>
-                                                                    <td><a target="_blank" href="@Url.Action("ProductDetail", "DanhMucSp", new {@MaSP = item.SanPhamID})"> @item.TenSanPham </a> </td>
-                                                                    <td> @item.DonGia VNĐ </td>
-                                                                    <td> <a href="@Url.Action("DeleteCartItem", "Cart", new {@MaSP = item.SanPhamID})" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a> </td>
+                                                                    <td colspan="4" class="text-center">Chưa có Sản Phẩm Nào</td>
                                                                 </tr>
                                                             }
                                                         }
-                                                        else
-                                                        {
-                                                            <tr>
-                                                                <td colspan="4" class="text-center">Chưa có Sản Phẩm Nào</td>
-                                                            </tr>
-                                                        }
-                                                    }
-                                                </table>
+                                                    </table>
+                                                </div>
+
                                             </div>
 
                                         </div>
-
                                     </div>
-                                </div>
+                                }
+                                else
+                                {
+                                    <span class="cart-basket d-flex align-items-center justify-content-center">
+                                        0
+                                    </span>
+                                }
                             }
-                            else
-                            {
-                                <span class="cart-basket d-flex align-items-center justify-content-center">
-                                    0
-                                </span>
-                            }
-                        }
-                    </a>
-                </li>
+                        </a>
+                    </li>
 
-            </ul>
-        </div>
-    </nav>
+                </ul>
+            </div>
+        </nav>
 
-</header>
+    </header>
 
     <main>
         <div class="wrapper">
@@ -371,10 +374,10 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#cartlist').css('display', 'none');
-            $('#cart').hover(function() {
+            $('#cart').hover(function () {
                 $('#cartlist').css('display', 'block');
             });
-            $('#cart').mouseout(function() {
+            $('#cart').mouseout(function () {
                 $('#cartlist').css('display', 'none');
             });
             //$('#cart').mouseleave(function () {
@@ -401,5 +404,6 @@
 
         });
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 </html>
